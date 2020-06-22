@@ -25,7 +25,10 @@ class RsaPrivateKey
      */
     public function __construct(string $filePath, $passphrase = '')
     {
-        $this->resource = openssl_pkey_get_private('file:///' . $filePath, $passphrase);
+        if (file_exists($filePath)) {
+            $filePath = 'file:///' . $filePath;
+        }
+        $this->resource = openssl_pkey_get_private($filePath, $passphrase);
 
         if (empty($this->resource)) {
             throw new InvalidKeyException();
