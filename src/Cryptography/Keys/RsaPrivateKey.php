@@ -48,6 +48,7 @@ class RsaPrivateKey
      */
     public function close()
     {
-        openssl_free_key($this->getResource());
+       // PHP 8 deprecation
+       // openssl_free_key($this->getResource());
     }
 }
